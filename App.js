@@ -1,6 +1,6 @@
 import Slider from '@react-native-community/slider';
 import React from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 export default function App() {
   return (
@@ -20,6 +20,14 @@ export default function App() {
           minimumTrackTintColor='#FF0000'
           maximumTrackTintColor='#000'
         />
+      </View>
+
+      <TouchableOpacity style={ styles.button }>
+        <Text style={ styles.buttonText }>Gerar senha</Text>
+      </TouchableOpacity>
+
+      <View style={ styles.area }>
+        <Text style={ styles.password }>12121212</Text>
       </View>
 
     </View>
@@ -47,8 +55,30 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 15,
     backgroundColor: '#fff',
-    width: '90%',
+    width: '80%',
     borderRadius: 7
+  },
+
+  button: {
+    backgroundColor: '#FFA200',
+    width: '80%',
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 7,
+    marginBottom: 25
+  },
+
+  buttonText: {
+    fontSize: 20,
+    color: '#fff',
+    fontWeight: 'bold'
+  },
+
+  password: {
+    padding: 10,
+    textAlign: 'center',
+    fontSize: 20
   }
 
 })
