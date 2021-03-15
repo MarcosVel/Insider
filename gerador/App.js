@@ -3,6 +3,11 @@ import React from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
 export default function App() {
+
+  function generatePass() {
+    alert('clicou no botao')
+  }
+
   return (
     <View style={ styles.container }>
       <Image
@@ -22,7 +27,7 @@ export default function App() {
         />
       </View>
 
-      <TouchableOpacity style={ styles.button }>
+      <TouchableOpacity style={ styles.button } onPress={generatePass} >
         <Text style={ styles.buttonText }>Gerar senha</Text>
       </TouchableOpacity>
 
