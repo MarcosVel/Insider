@@ -1,11 +1,27 @@
 import Slider from '@react-native-community/slider';
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import Clipboard from 'expo-clipboard';
+
+let charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789';
 
 export default function App() {
+  const [ password, setPassword ] = useState('');
+  const [ size, setSize ] = useState(10);
 
   function generatePass() {
-    alert('clicou no botao')
+    let pass = '';
+    for (let i = 0, n = charset.length; i < size; i++) {
+      pass += charset.charAt(Math.floor(Math.random() * n))
+    }
+
+    setPassword(pass);
+  }
+
+  function copyPass() {
+    Clipboard.setString(password);
+    alert('Senha copiada com sucesso!');
+
   }
 
   return (
@@ -15,25 +31,33 @@ export default function App() {
         style={ styles.logo }
       />
 
-      <Text style={ styles.title }>12 Caracteres</Text>
+      <Text style={ styles.title }>{ size } Caracteres</Text>
 
       <View style={ styles.area }>
-        <Slider 
-          style={{ height: 50 }}
-          minimumValue={5}
-          maximumValue={15}
+        <Slider
+          style={ { height: 50 } }
+          minimumValue={ 4 }
+          maximumValue={ 25 }
           minimumTrackTintColor='#FF0000'
           maximumTrackTintColor='#000'
+          value={ size }
+          // .toFixed(0) serve para as casas decimais, se não quero nenhuma, = 0;
+          onValueChange={ (valor) => setSize(valor.toFixed(0)) }
         />
       </View>
 
-      <TouchableOpacity style={ styles.button } onPress={generatePass} >
+      <TouchableOpacity style={ styles.button } onPress={ generatePass } >
         <Text style={ styles.buttonText }>Gerar senha</Text>
       </TouchableOpacity>
 
-      <View style={ styles.area }>
-        <Text style={ styles.password }>12121212</Text>
-      </View>
+      {password !== '' && (
+        <View style={ styles.area }>
+          <Text 
+            style={ styles.password }
+            onLongPress={ copyPass }
+          >{ password }</Text>
+        </View>
+      ) }
 
     </View>
   )
@@ -47,7 +71,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F3F3FF'
   },
 
-  logo: { 
+  logo: {
     marginBottom: 60,
   },
 
