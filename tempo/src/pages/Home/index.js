@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#e8f0ff',
-    paddingTop: '5%'
+    paddingTop: '2%'
   },
 
   list: {
