@@ -1,13 +1,15 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, Text } from 'react-native';
+import Conditions from '../../components/Conditions';
 import Header from '../../components/Header';
 import Menu from '../../components/Menu';
 
 export default function Home() {
   return (
     <SafeAreaView style={ styles.container }>
-      <Header />
       <Menu />
+      <Header />
+      <Conditions />
     </SafeAreaView>
   )
 }
