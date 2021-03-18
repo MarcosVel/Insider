@@ -86,6 +86,6 @@ const styles = StyleSheet.create({
 
   list: {
     marginTop: 10,
-    marginLeft: 10,
+    marginRight: 11,
   }
 })

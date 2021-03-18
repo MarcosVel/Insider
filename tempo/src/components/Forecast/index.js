@@ -9,7 +9,7 @@ export default function Forecast({ data }) {
   return (
     <View style={ styles.container }>
       <Text style={ styles.date }>{ data.date }</Text>
-      <Ionicons name="rainy-outline" color="#1ec9ff" size={ 25 } />
+      <Ionicons name={ icon.name } color={ icon.color } size={ 25 } />
       <View style={ styles.temp }>
         <Text>{ data.min }°</Text>
         <Text style={ { fontSize: 18, fontWeight: 'bold' } }>{ data.max }°</Text>

@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
 
-
 export default function Conditions() {
   return (
     <View style={ styles.container }>
@@ -19,7 +18,7 @@ export default function Conditions() {
         <MaterialCommunityIcons
           name="weather-sunset-up"
           size={ 23 }
-          color='#1ed6ff'
+          color='#f5d400'
         />
         <Text>5:22 am</Text>
       </View>
@@ -28,7 +27,7 @@ export default function Conditions() {
         <MaterialCommunityIcons
           name="weather-sunset-down"
           size={ 23 }
-          color='#1ed6ff'
+          color='#FFB300'
         />
         <Text>18:22 pm</Text>
       </View>
