@@ -7,6 +7,8 @@ import Header from '../../components/Header';
 import Conditions from '../../components/Conditions';
 import Forecast from '../../components/Forecast';
 
+import api, { key } from '../../services/api';
+
 const mylist = [
   {
     "date": "18/03",
@@ -61,9 +63,13 @@ const mylist = [
 export default function Home() {
   const [ errorMsg, setErrorMsg ] = useState(null);
   const [ loading, setLoading ] = useState(true);
+  const [ weather, setWeather ] = useState([]);
+  const [ icon, setIcon ] = useState({ name: "cloud", color: "#fff" });
+  const [ background, setBackground ] = useState([ '#1ed6ff', '#97c1ff' ]);
 
-  // buscar localização do usuário ao entrar
   useEffect(() => {
+
+    // buscar localização do usuário ao entrar
     (async () => {
       let { status } = await Location.requestPermissionsAsync();
 
@@ -75,6 +81,53 @@ export default function Home() {
 
       let location = await Location.getCurrentPositionAsync({});
       // console.log(location.coords);
+
+      const response = await api.get(`/weather?key=${ key }&lat=${ location.coords.latitude }&lon=${ location.coords.longitude }`);
+
+      setWeather(response.data);
+
+      if (response.data.results.currently === 'noite') {
+        setBackground([ '#0c3741', '#0f2f61' ])
+      }
+
+      switch (response.data.results.condition_slug) {
+        case 'storm':
+          setIcon({
+            name: "thunderstorm-outline",
+            color: '#1ec9ff',
+          });
+          break;
+
+        case 'clear_day':
+          setIcon({
+            name: "sunny-outline",
+            color: '#FFB300'
+          });
+          break;
+
+        case 'rain':
+          setIcon({
+            name: "rainy-outline",
+            color: '#1ec9ff',
+          });
+          break;
+
+        case 'cloud':
+          setIcon({
+            name: "cloud-outline",
+            color: '#1ec9ff'
+          });
+          break;
+
+        default:
+          setIcon({
+            name: "partly-sunny-outline",
+            color: '#FFB300',
+          });
+      }
+
+      setLoading(false);
+
     })();
 
   }, []);
