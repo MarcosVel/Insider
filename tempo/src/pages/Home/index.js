@@ -1,6 +1,7 @@
-import React from 'react';
-import { SafeAreaView, StyleSheet, Text } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import React, { useState, useEffect } from 'react';
+import { SafeAreaView, StyleSheet, FlatList } from 'react-native';
+import * as Location from 'expo-location';
+
 import Menu from '../../components/Menu';
 import Header from '../../components/Header';
 import Conditions from '../../components/Conditions';
@@ -58,6 +59,26 @@ const mylist = [
 ];
 
 export default function Home() {
+  const [ errorMsg, setErrorMsg ] = useState(null);
+  const [ loading, setLoading ] = useState(true);
+
+  // buscar localização do usuário ao entrar
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestPermissionsAsync();
+
+      if (status != 'granted') {
+        setErrorMsg('Permissão de localização negada!');
+        setLoading(false);
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      // console.log(location.coords);
+    })();
+
+  }, []);
+
   return (
     <SafeAreaView style={ styles.container }>
       <Menu />
@@ -65,6 +86,7 @@ export default function Home() {
       <Conditions />
       <FlatList
         horizontal={ true }
+        showsHorizontalScrollIndicator={ false }
         contentContainerStyle={ { paddingBottom: '5%' } }
         style={ styles.list }
         data={ mylist }
