@@ -93,35 +93,35 @@ export default function Home() {
       switch (response.data.results.condition_slug) {
         case 'storm':
           setIcon({
-            name: "thunderstorm-outline",
+            name: "thunderstorm",
             color: '#1ec9ff',
           });
           break;
 
         case 'clear_day':
           setIcon({
-            name: "sunny-outline",
+            name: "sunny",
             color: '#FFB300'
           });
           break;
 
         case 'rain':
           setIcon({
-            name: "rainy-outline",
+            name: "rainy",
             color: '#1ec9ff',
           });
           break;
 
         case 'cloud':
           setIcon({
-            name: "cloud-outline",
-            color: '#1ec9ff'
+            name: "cloud",
+            color: '#fff'
           });
           break;
 
         default:
           setIcon({
-            name: "partly-sunny-outline",
+            name: "partly-sunny",
             color: '#FFB300',
           });
       }
@@ -135,7 +135,11 @@ export default function Home() {
   return (
     <SafeAreaView style={ styles.container }>
       <Menu />
-      <Header />
+      <Header
+        background={ background }
+        weather={ weather }
+        icon={ icon }
+      />
       <Conditions />
       <FlatList
         horizontal={ true }
