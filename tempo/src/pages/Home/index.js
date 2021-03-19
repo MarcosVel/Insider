@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, StyleSheet, FlatList } from 'react-native';
+import { SafeAreaView, StyleSheet, FlatList, View, Text } from 'react-native';
 import * as Location from 'expo-location';
 
 import Menu from '../../components/Menu';
@@ -132,6 +132,14 @@ export default function Home() {
 
   }, []);
 
+  if (loading) {
+    return (
+      <View style={ styles.container }>
+        <Text style={ { fontSize: 17, fontStyle: 'italic' } }>Carregando dados...</Text>
+      </View>
+    )
+  }
+
   return (
     <SafeAreaView style={ styles.container }>
       <Menu />
@@ -140,7 +148,7 @@ export default function Home() {
         weather={ weather }
         icon={ icon }
       />
-      <Conditions />
+      <Conditions weather={ weather } />
       <FlatList
         horizontal={ true }
         showsHorizontalScrollIndicator={ false }
