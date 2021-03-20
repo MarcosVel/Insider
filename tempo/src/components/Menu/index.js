@@ -7,10 +7,10 @@ export default function Menu() {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity style={styles.container} onPress={ () => navigation.openDrawer() }>
-      <Feather 
+    <TouchableOpacity style={ styles.container } onPress={ () => navigation.openDrawer() }>
+      <Feather
         name="menu"
-        size={36}
+        size={ 36 }
         color="#373737"
       />
     </TouchableOpacity>
@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    top: 40,
-    left: 15,
+    top: 8,
+    left: 10,
     borderTopRightRadius: 30,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,

@@ -9,57 +9,6 @@ import Forecast from '../../components/Forecast';
 
 import api, { key } from '../../services/api';
 
-const mylist = [
-  {
-    "date": "18/03",
-    "weekday": "Qui",
-    "max": 27,
-    "min": 21,
-    "description": "Chuvas esparsas",
-    "condition": "rain"
-  },
-  {
-    "date": "19/03",
-    "weekday": "Sex",
-    "max": 28,
-    "min": 21,
-    "description": "Chuva",
-    "condition": "rain"
-  },
-  {
-    "date": "20/03",
-    "weekday": "Sáb",
-    "max": 29,
-    "min": 20,
-    "description": "Chuvas esparsas",
-    "condition": "rain"
-  },
-  {
-    "date": "21/03",
-    "weekday": "Dom",
-    "max": 30,
-    "min": 21,
-    "description": "Chuvas esparsas",
-    "condition": "rain"
-  },
-  {
-    "date": "22/03",
-    "weekday": "Seg",
-    "max": 30,
-    "min": 21,
-    "description": "Parcialmente nublado",
-    "condition": "cloud"
-  },
-  {
-    "date": "23/03",
-    "weekday": "Ter",
-    "max": 25,
-    "min": 24,
-    "description": "Tempo limpo",
-    "condition": "clear_day"
-  }
-];
-
 export default function Home() {
   const [ errorMsg, setErrorMsg ] = useState(null);
   const [ loading, setLoading ] = useState(true);
@@ -154,7 +103,7 @@ export default function Home() {
         showsHorizontalScrollIndicator={ false }
         contentContainerStyle={ { paddingBottom: '5%' } }
         style={ styles.list }
-        data={ mylist }
+        data={ weather.results.forecast }
         keyExtractor={ item => item.date }
         renderItem={ ({ item }) => <Forecast data={ item } /> }
       />
