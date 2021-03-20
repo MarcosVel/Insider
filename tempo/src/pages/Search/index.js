@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, TextInput, Keyb
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import api, { key } from '../../services/api';
+import { LinearGradient } from 'expo-linear-gradient';
+import Conditions from '../../components/Conditions'
 
 export default function Search() {
   const navigation = useNavigation();
@@ -27,6 +29,52 @@ export default function Search() {
     setInput('');
     Keyboard.dismiss(); // Para esconder o teclado
 
+  }
+
+  if (city) {
+    return (
+      <SafeAreaView style={ styles.container }>
+        <TouchableOpacity style={ styles.backButton } onPress={ () => navigation.navigate('Home') } >
+          <Feather
+            name="chevron-left"
+            size={ 32 }
+            color='#000'
+          />
+          <Text style={ { fontSize: 22 } }>Voltar</Text>
+        </TouchableOpacity>
+
+        <View style={ styles.searchBox }>
+          <TextInput
+            value={ input }
+            onChangeText={ (valor) => setInput(valor) }
+            placeholder='Ex: Campinas, SP'
+            style={ styles.input }
+          />
+          <TouchableOpacity
+            style={ styles.icon }
+            onPress={ handleSearch }
+          >
+            <Feather
+              name="search"
+              size={ 22 }
+              color='#fff'
+            />
+          </TouchableOpacity>
+        </View>
+
+        <LinearGradient
+          style={ styles.header }
+          colors={ [ '#1ed6ff', '#97c1ff' ] }
+        >
+          <Text style={ styles.date }>{ city.results.date }</Text>
+          <Text style={ styles.city }>{ city.results.city_name }</Text>
+          <Text style={ styles.temp }>{ city.results.temp }°</Text>
+
+          <Conditions weather={ city } />
+        </LinearGradient>
+
+      </SafeAreaView>
+    )
   }
 
   return (
@@ -108,5 +156,31 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderTopRightRadius: 8,
     borderBottomRightRadius: 8
+  },
+
+  header: {
+    marginTop: '5%',
+    width: '95%',
+    paddingVertical: '5%',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: 8,
+  },
+
+  date: {
+    color: '#fff',
+    fontSize: 16
+  },
+
+  city: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#fff'
+  },
+
+  temp: {
+    color: '#fff',
+    fontSize: 90,
+    fontWeight: 'bold',
   }
 })
